@@ -66,3 +66,23 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+Δυστηχώς απαιτείται η ακόλουθη προσθήκη στο αρχείο webpack.config.js: 
+στο attribute: alias: προσθέτουμε (σε οποιαδήποτε θέση):
+"tinyqueue": "/home/theodoros/apathon/node_modules/tinyqueue/tinyqueue.js",
+
+θα πρέπει να γίνει κάπως έτσι:
+alias: {
+        // Support React Native Web
+        // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
+        'react-native': 'react-native-web',
+        "tinyqueue": "/home/theodoros/apathon/node_modules/tinyqueue/tinyqueue.js",
+        // Allows for better profiling with ReactDevTools
+        ...(isEnvProductionProfile && {
+          'react-dom$': 'react-dom/profiling',
+          'scheduler/tracing': 'scheduler/tracing-profiling',
+        }),
+        ...(modules.webpackAliases || {}),
+      }
+
+https://github.com/mourner/rbush-knn/issues/18
