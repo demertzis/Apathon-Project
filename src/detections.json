@@ -1,360 +1,359 @@
 {
-  "features":
-  [
-  {
-    "device_id": "11",
-    "NumberOfRecords": "110",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "12",
-    "NumberOfRecords": "154",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "13",
-    "NumberOfRecords": "136",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "14",
-    "NumberOfRecords": "219",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "15",
-    "NumberOfRecords": "167",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "16",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "17",
-    "NumberOfRecords": "334",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "18",
-    "NumberOfRecords": "99",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "19",
-    "NumberOfRecords": "108",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "20",
-    "NumberOfRecords": "194",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "21",
-    "NumberOfRecords": "125",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "22",
-    "NumberOfRecords": "267",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "23",
-    "NumberOfRecords": "181",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "24",
-    "NumberOfRecords": "79",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "25",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "26",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "27",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "28",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "29",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "30",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "31",
-    "NumberOfRecords": "354",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "32",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "33",
-    "NumberOfRecords": "171",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "34",
-    "NumberOfRecords": "138",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "35",
-    "NumberOfRecords": "325",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "36",
-    "NumberOfRecords": "260",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "37",
-    "NumberOfRecords": "157",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "38",
-    "NumberOfRecords": "286",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "39",
-    "NumberOfRecords": "221",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "40",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "41",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "42",
-    "NumberOfRecords": "124",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "43",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "44",
-    "NumberOfRecords": "222",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "45",
-    "NumberOfRecords": "213",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "46",
-    "NumberOfRecords": "69",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "47",
-    "NumberOfRecords": "229",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "48",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "49",
-    "NumberOfRecords": "121",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "50",
-    "NumberOfRecords": "224",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "51",
-    "NumberOfRecords": "115",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "52",
-    "NumberOfRecords": "98",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "53",
-    "NumberOfRecords": "173",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "54",
-    "NumberOfRecords": "207",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "55",
-    "NumberOfRecords": "94",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "56",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "57",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "58",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "59",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "60",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "61",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "62",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "63",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "64",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "65",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "66",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "67",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "68",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "69",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "70",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "71",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "72",
-    "NumberOfRecords": "109",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "73",
-    "NumberOfRecords": "68",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "74",
-    "NumberOfRecords": "170",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "75",
-    "NumberOfRecords": "213",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "76",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "77",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "78",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "79",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "80",
-    "NumberOfRecords": "0",
-    "timestamp": "2020-08-10 10:30:03.547"
-  },
-  {
-    "device_id": "93",
-    "NumberOfRecords": "116",
-    "timestamp": "2020-08-10 10:30:03.547"
-  }
-]
+  "features": [
+    {
+      "device_id": "11",
+      "NumberOfRecords": "110",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "12",
+      "NumberOfRecords": "154",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "13",
+      "NumberOfRecords": "136",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "14",
+      "NumberOfRecords": "219",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "15",
+      "NumberOfRecords": "167",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "16",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "17",
+      "NumberOfRecords": "334",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "18",
+      "NumberOfRecords": "99",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "19",
+      "NumberOfRecords": "108",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "20",
+      "NumberOfRecords": "194",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "21",
+      "NumberOfRecords": "125",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "22",
+      "NumberOfRecords": "267",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "23",
+      "NumberOfRecords": "181",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "24",
+      "NumberOfRecords": "79",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "25",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "26",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "27",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "28",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "29",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "30",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "31",
+      "NumberOfRecords": "354",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "32",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "33",
+      "NumberOfRecords": "171",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "34",
+      "NumberOfRecords": "138",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "35",
+      "NumberOfRecords": "325",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "36",
+      "NumberOfRecords": "260",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "37",
+      "NumberOfRecords": "157",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "38",
+      "NumberOfRecords": "286",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "39",
+      "NumberOfRecords": "221",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "40",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "41",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "42",
+      "NumberOfRecords": "124",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "43",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "44",
+      "NumberOfRecords": "222",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "45",
+      "NumberOfRecords": "213",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "46",
+      "NumberOfRecords": "69",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "47",
+      "NumberOfRecords": "229",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "48",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "49",
+      "NumberOfRecords": "121",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "50",
+      "NumberOfRecords": "224",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "51",
+      "NumberOfRecords": "115",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "52",
+      "NumberOfRecords": "98",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "53",
+      "NumberOfRecords": "173",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "54",
+      "NumberOfRecords": "207",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "55",
+      "NumberOfRecords": "94",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "56",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "57",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "58",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "59",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "60",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "61",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "62",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "63",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "64",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "65",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "66",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "67",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "68",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "69",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "70",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "71",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "72",
+      "NumberOfRecords": "109",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "73",
+      "NumberOfRecords": "68",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "74",
+      "NumberOfRecords": "170",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "75",
+      "NumberOfRecords": "213",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "76",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "77",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "78",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "79",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "80",
+      "NumberOfRecords": "0",
+      "timestamp": "2020-08-10 10:30:03.547"
+    },
+    {
+      "device_id": "93",
+      "NumberOfRecords": "116",
+      "timestamp": "2020-08-10 10:30:03.547"
+    }
+  ]
 }

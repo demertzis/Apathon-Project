@@ -1,8 +1,8 @@
-import * as paths from './paths.json'
-import polylineDistance from './polylineDistance'
+import * as paths from './paths.json';
+import polylineDistance from './polylineDistance';
 
 export default function (currentPos = null, polyline = null) {
-  if (!currentPos)  return null;
+  if (!currentPos) return null;
   /*call webservice 7
   let arr =;
   let minPath = {

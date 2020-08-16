@@ -10,66 +10,42 @@
     {
       "STATION_ID": 1,
       "NAME": "leukos purgos",
-      "coordinates": [
-        40.618175,
-        22.958970
-      ]
+      "coordinates": [40.618175, 22.95897]
     },
     {
       "STATION_ID": 2,
       "NAME": "xarilaou",
-      "coordinates": [
-        40.651167,
-        22.958168
-      ]
+      "coordinates": [40.651167, 22.958168]
     },
     {
       "STATION_ID": 3,
       "NAME": "ladadika",
-      "coordinates": [
-        40.648435,
-        22.933872
-      ]
+      "coordinates": [40.648435, 22.933872]
     },
     {
       "STATION_ID": 4,
       "NAME": "Toumpa",
-      "coordinates": [
-        40.651821,
-        22.922535
-      ]
+      "coordinates": [40.651821, 22.922535]
     },
     {
       "STATION_ID": 5,
       "NAME": "egnatia",
-      "coordinates": [
-        40.661312,
-        22.922782
-      ]
+      "coordinates": [40.661312, 22.922782]
     },
     {
       "STATION_ID": 6,
       "NAME": "aristotelous",
-      "coordinates": [
-        40.641531,
-        22.916007
-      ]
+      "coordinates": [40.641531, 22.916007]
     },
     {
       "STATION_ID": 7,
       "NAME": "olumpou",
-      "coordinates": [
-        40.639968,
-        22.948129
-      ]
+      "coordinates": [40.639968, 22.948129]
     },
     {
       "STATION_ID": 8,
       "NAME": "makedonia",
-      "coordinates": [
-        40.673437,
-        22.955172
-      ]
+      "coordinates": [40.673437, 22.955172]
     }
   ]
 }
