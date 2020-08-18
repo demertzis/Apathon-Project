@@ -3,6 +3,7 @@ import polylineDistance from './polylineDistance';
 import * as devices from './devices.json';
 import * as crossArrayFull from './crossArray.json';
 import distance from './distance.js';
+import TinyQueue from 'tinyqueue';
 
 export default function pathsArray(
   currentPos = null,
@@ -125,116 +126,120 @@ export default function pathsArray(
   const length = i;
 
   function findPath(
-    path = null,
-    pathsAccessed = null,
-    startPos = null,
+    path1 = null,
+    pathsAccessed1 = null,
+    startPos1 = null,
     offset = 0.05
   ) {
-    if (!path) return null;
-    console.log(JSON.stringify(path));
+    if (!path1) return null;
+    // console.log(JSON.stringify(path1));
 
-    if (path.length > 10) return null;
-
-    const lastPath = path[path.length - 1];
-
-    let destDevice = {
-      lat: Number(
-        devicesArray[workingArray[lastPath].Path_destination_device_id].lat
-      ),
-      lng: Number(
-        devicesArray[workingArray[lastPath].Path_destination_device_id].lng
-      ),
-    };
-
-    let dist1 = distance(startPos, destination);
-    let dist2 = distance(destDevice, destination);
-    let dist3 = distance(destDevice, startPos);
-
-    if (
-      dist1 < 0.3 ||
-      dist2 < 0.3 ||
-      (workingArray[lastPath].close_to_finish && dist2 <= dist3)
-    ) {
-      console.log(
-        path.map((x) => ({
-          id: workingArray[x].Path_id,
-          origin: workingArray[x].Path_origin_device_id,
-        }))
-      );
-      return path;
-    }
-    if (workingArray[lastPath].close_to_finish && dist2 > dist3) return null;
-
-    let t = lastPath;
-
-    while (pathsAccessed[t] === false) {
-      pathsAccessed[t] = true;
-      let opposite = workingArray[t].hasOpposite;
-      t = opposite !== false ? opposite : t;
-    }
-
-    let crossList = [];
-    workingArray[lastPath].crosses.forEach((e) => {
-      if (!pathsAccessed[e]) crossList.push(e);
+    let queue = new TinyQueue();
+    let solutions = [];
+    queue.push({
+      path: path1,
+      pathsAccessed: pathsAccessed1,
+      startPos: startPos1,
     });
 
-    let i = 0;
-    l = crossList.length;
+    while (queue.length > 0) {
+      let currentNode = queue.pop();
+      let path = currentNode.path;
+      let pathsAccessed = currentNode.pathsAccessed;
+      let startPos = currentNode.startPos;
+      if (path.length > 4) continue;
+      const lastPath = path[path.length - 1];
+      let destDevice = {
+        lat: Number(
+          devicesArray[workingArray[lastPath].Path_destination_device_id].lat
+        ),
+        lng: Number(
+          devicesArray[workingArray[lastPath].Path_destination_device_id].lng
+        ),
+      };
 
-    for (i in crossList) {
-      let pathPoints = workingArray[lastPath].polyline.split(' ');
-      let newStartPos = polylineDistance(
-        startPos,
-        workingArray[crossList[i]].polyline
-      );
-      let j = newStartPos.pointId;
-      let l2 = pathPoints.length;
-
-      for (; j < l2; j++) {
-        let point = {
-          lat: Number(pathPoints[j].split(',')[1]),
-          lng: Number(pathPoints[j].split(',')[0]),
-        };
-        let candidateStartPos = polylineDistance(
-          point,
-          workingArray[crossList[i]].polyline
-        );
-        newStartPos =
-          newStartPos.dist > candidateStartPos.dist
-            ? candidateStartPos
-            : newStartPos;
-        if (newStartPos.dist < 0.1) break;
-      }
+      let dist1 = distance(startPos, destination);
+      let dist2 = distance(destDevice, destination);
+      let dist3 = distance(destDevice, startPos);
 
       if (
-        newStartPos.dist > 0.1 ||
-        distance(
-          newStartPos,
-          devicesArray[workingArray[crossList[i]].Path_destination_device_id]
-        ) < 0.1
+        dist1 < 0.3 ||
+        dist2 < 0.3 ||
+        (workingArray[lastPath].close_to_finish && dist2 <= dist3)
       ) {
-        crossList.splice(i, 1);
-        l--;
-        i--;
+        console.log(
+          path.map((x) => ({
+            id: workingArray[x].Path_id,
+            origin: workingArray[x].Path_origin_device_id,
+          }))
+        );
+        solutions.push(path);
         continue;
       }
+      if (workingArray[lastPath].close_to_finish && dist2 > dist3) continue;
 
-      let newPath = path.concat([crossList[i]]);
-      let pathContinuation = findPath(
-        newPath,
-        pathsAccessed,
-        {
-          lat: newStartPos.lat,
-          lng: newStartPos.lng,
-        },
-        offset
-      );
+      let t = lastPath;
 
-      if (Array.isArray(pathContinuation)) return pathContinuation;
-      else continue;
+      while (pathsAccessed[t] === false) {
+        pathsAccessed[t] = true;
+        let opposite = workingArray[t].hasOpposite;
+        t = opposite !== false ? opposite : t;
+      }
+
+      let crossList = [];
+      workingArray[lastPath].crosses.forEach((e) => {
+        if (!pathsAccessed[e]) crossList.push(e);
+      });
+
+      let i = 0;
+      l = crossList.length;
+
+      for (i in crossList) {
+        let pathPoints = workingArray[lastPath].polyline.split(' ');
+        let newStartPos = polylineDistance(
+          startPos,
+          workingArray[crossList[i]].polyline
+        );
+        let j = newStartPos.pointId;
+        let l2 = pathPoints.length;
+
+        for (; j < l2; j++) {
+          let point = {
+            lat: Number(pathPoints[j].split(',')[1]),
+            lng: Number(pathPoints[j].split(',')[0]),
+          };
+          let candidateStartPos = polylineDistance(
+            point,
+            workingArray[crossList[i]].polyline
+          );
+          newStartPos =
+            newStartPos.dist > candidateStartPos.dist
+              ? candidateStartPos
+              : newStartPos;
+          if (newStartPos.dist < 0.1) break;
+        }
+
+        if (
+          newStartPos.dist > 0.1 ||
+          distance(
+            newStartPos,
+            devicesArray[workingArray[crossList[i]].Path_destination_device_id]
+          ) < 0.1
+        ) {
+          crossList.splice(i, 1);
+          l--;
+          i--;
+          continue;
+        }
+
+        queue.push({
+          path: path.concat(crossList[i]),
+          pathsAccessed: pathsAccessed,
+          startPos: newStartPos,
+        });
+      }
     }
-
-    return null;
+    return solutions;
   }
 
   let finalAnswer = [];
@@ -246,7 +251,7 @@ export default function pathsArray(
       let pathsAccessed = {};
       for (const id in workingArray) pathsAccessed[id] = false;
       let test = findPath(
-        [firstPath],
+        firstPath,
         pathsAccessed,
         {
           lat: polylineDistance(currentPos, workingArray[firstPath].polyline)
@@ -258,8 +263,8 @@ export default function pathsArray(
         0.1
       );
 
-      if (Array.isArray(test))
-        finalAnswer.push(test.map((x) => Number(workingArray[x].Path_id)));
+      if (Array.isArray(test) && test.length > 0)
+        finalAnswer = finalAnswer.concat(test);
     }
     if (Array.isArray(finalAnswer) && finalAnswer.length > 0)
       return finalAnswer;
