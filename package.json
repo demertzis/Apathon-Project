@@ -14,6 +14,7 @@
     "prettier": "^2.0.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-leaflet": "^2.7.0",
     "react-scripts": "3.4.1",
     "turf-linestring": "^1.0.2"
   },
