@@ -2,21 +2,7 @@ import * as paths from './paths.json';
 import polylineDistance from './polylineDistance';
 import * as devices from './devices.json';
 import * as crossArrayFull from './crossArray.json';
-// import concaveCross from './concaveCross';
-// import { point, bearing } from '@turf/turf'
 import distance from './distance.js';
-
-import { polygon, booleanDisjoint } from '@turf/turf/turf.js';
-import pathTransform from './pathTransform.js';
-import concaveman from 'concaveman';
-
-// export function removePaths(currentPos, destination, pathEndPoint) {
-//   let point1 = point([Number(currentPos.lat), Number(currentPos.lng)]);
-//   let point2 = point([Number(destination.lat), Number(destination.lng)]);
-//   let point3 = point([Number(pathEndPoint.lat), Number(pathEndPoint.lng)]);
-
-//   return Math.abs(bearing(point1, point2) - bearing(point1, point3)) >= 120;
-// }
 
 export default function pathsArray(
   currentPos = null,
@@ -109,7 +95,6 @@ export default function pathsArray(
     }
   }
 
-  let crossArray = [];
   for (const id in workingDictionary) {
     workingDictionary[id].crosses = crossArrayFull.default[Number(id) - 1]
       .reduce((acc, entry, i) => {
@@ -128,74 +113,8 @@ export default function pathsArray(
             workingDictionary[id].Path_origin_device_id
       );
   }
-  let len = workingDictionary.length;
   const workingArray = workingDictionary;
-
-  // let crossArray = {};
-  // for (const id in workingArray)
-  //   crossArray[id] = ((x) => {
-  //     crossArray[x] = [];
-  //     crossArrayFull[x - 1].forEach((elem, index, array) => {
-  //       if (elem === true) crossArray[x].push(index + 1);
-  //       return;
-  //     });
-  //   })(id);
-
-  // let crossArray = [];
-  // i = 0;
-  // l = pathArr.length;
-  // for (; i < l; i++) {
-  //   if (!queue[i]) continue;
-  //   else {
-  //     crossArray.push([]);
-  //     j = 0;
-  //   }
-  //   for (; j < l; j++)
-  //     if (queue[j])
-  //       crossArray[crossArray.length - 1].push(crossArrayFull.default[i][j]);
-  // }
-  // i = 0;
-  // l = crossArray.length;
-  // let crossArrayList = [];
-  // for (; i < l; i++) {
-  //   j = 0;
-  //   crossArrayList.push([]);
-  //   for (; j < l; j++)
-  //     if (j != i && crossArray[i][j]) crossArrayList[i].push(j);
-  // }
-  // crossArray = [];
-  // i = 0;
-  // for (; i < l; i++) {
-  //   crossArray.push([]);
-  //   crossArray[i] = crossArrayList[i].filter(
-  //     (x) =>
-  //       workingArray[x].Path_origin_device_id !=
-  //         workingArray[i].Path_origin_device_id &&
-  //       workingArray[x].Path_destination_device_id !=
-  //         workingArray[i].Path_destination_device_id &&
-  //       workingArray[x].Path_destination_device_id !=
-  //         workingArray[i].Path_origin_device_id
-  //   );
-  // }
-  // let crossArrayPathId = crossArray.map((x) =>
-  //   x.map((y) => Number(workingArray[y].Path_id))
-  // );
-  // let crossArrayListPathId = crossArrayList.map((x) =>
-  //   x.map((y) => Number(workingArray[y].Path_id))
-  // );
-  // // devicesArray.reduce((acc, entry, i) => {
-  // //   acc[entry.device_id] = entry;
-  // //   return acc;
-  // // }, {});
-  // crossArrayPathId = crossArrayPathId.reduce((acc, entry, i) => {
-  //   acc[workingArray[i].Path_id] = entry;
-  //   return acc;
-  // }, {});
-  // crossArrayListPathId = crossArrayListPathId.reduce((acc, entry, i) => {
-  //   acc[workingArray[i].Path_id] = entry;
-  //   return acc;
-  // }, {});
-  // debugger;
+  let crossArray = [];
   let firstPathArray = [];
   i = 0;
   for (const id in workingArray) {
@@ -203,26 +122,27 @@ export default function pathsArray(
       firstPathArray.push(id);
     i++;
   }
-
   const length = i;
 
-  let pathsAccessed = new Array(length);
-
-  function findPath(path = null, startPos = null, offset = 0.05) {
+  function findPath(
+    path = null,
+    pathsAccessed = null,
+    startPos = null,
+    offset = 0.05
+  ) {
     if (!path) return null;
+    console.log(JSON.stringify(path));
 
-    if (path.length > 7) return null;
+    if (path.length > 10) return null;
+
+    const lastPath = path[path.length - 1];
 
     let destDevice = {
       lat: Number(
-        devicesArray[
-          workingArray[path[path.length - 1]].Path_destination_device_id
-        ].lat
+        devicesArray[workingArray[lastPath].Path_destination_device_id].lat
       ),
       lng: Number(
-        devicesArray[
-          workingArray[path[path.length - 1]].Path_destination_device_id
-        ].lng
+        devicesArray[workingArray[lastPath].Path_destination_device_id].lng
       ),
     };
 
@@ -233,7 +153,7 @@ export default function pathsArray(
     if (
       dist1 < 0.3 ||
       dist2 < 0.3 ||
-      (workingArray[path[path.length - 1]].close_to_finish && dist2 <= dist3)
+      (workingArray[lastPath].close_to_finish && dist2 <= dist3)
     ) {
       console.log(
         path.map((x) => ({
@@ -243,53 +163,26 @@ export default function pathsArray(
       );
       return path;
     }
-    if (workingArray[path[path.length - 1]].close_to_finish && dist2 > dist3)
-      return null;
+    if (workingArray[lastPath].close_to_finish && dist2 > dist3) return null;
+
+    let t = lastPath;
+
+    while (pathsAccessed[t] === false) {
+      pathsAccessed[t] = true;
+      let opposite = workingArray[t].hasOpposite;
+      t = opposite !== false ? opposite : t;
+    }
+
+    let crossList = [];
+    workingArray[lastPath].crosses.forEach((e) => {
+      if (!pathsAccessed[e]) crossList.push(e);
+    });
 
     let i = 0;
-    l = workingArray.length;
-    pathsAccessed[path[path.length - 1]] = true;
-    let possibleOpposite = workingArray[path[path.length - 1]].hasOpposite;
-    if (possibleOpposite !== false) {
-      pathsAccessed[possibleOpposite] = true;
-      pathsAccessed[workingArray[possibleOpposite].hasOpposite] = true;
-    }
-
-    // pathsAccessed = getNewPathsAccessed(path[path.length - 1]);
-
-    i = 0;
-    l = workingArray.length;
-    let crossList = [];
-
-    // if (!Array.isArray(crossArray[i])) {
-    //   crossArray[path[path.length - 1]] = new Array(workingArray.length);
-    //   i = 0;
-    //   for (; i < l; i++)
-    //     crossArray[path[path.length - 1]][i] =
-    //       concaveCross(workingArray[path[path.length - 1]].polyline, workingArray[i].polyline, offset) ?
-    //         true : false
-    // }
-
-    i = 0;
-    l = crossArray[path[path.length - 1]].length;
-    for (; i < l; i++) {
-      let candidatePath = crossArray[path[path.length - 1]][i];
-      if (!pathsAccessed.includes(candidatePath)) crossList.push(candidatePath);
-    }
-    // for (; i < l; i++)
-    //   if (
-    //     i != path[path.length - 1] &&
-    //     // !pathsAccessed.includes(i) &&
-    //     !pathsAccessed[i] &&
-    //     crossArray[path[path.length - 1]][i]
-    //   )
-    //     crossList.push(i);
-
     l = crossList.length;
 
-    i = 0;
-    for (; i < l; i++) {
-      let pathPoints = workingArray[path[path.length - 1]].polyline.split(' ');
+    for (i in crossList) {
+      let pathPoints = workingArray[lastPath].polyline.split(' ');
       let newStartPos = polylineDistance(
         startPos,
         workingArray[crossList[i]].polyline
@@ -327,9 +220,9 @@ export default function pathsArray(
       }
 
       let newPath = path.concat([crossList[i]]);
-      // let newPathsAccessed = pathsAccessed;
       let pathContinuation = findPath(
         newPath,
+        pathsAccessed,
         {
           lat: newStartPos.lat,
           lng: newStartPos.lng,
@@ -345,25 +238,23 @@ export default function pathsArray(
   }
 
   let finalAnswer = [];
-  //let pathsAccessed = new Array(workingArray.length).fill(false);
   if (firstPathArray.length > 0) {
     let i = 0;
     let l = firstPathArray.length;
     for (; i < l; i++) {
-      pathsAccessed.fill(false);
-
+      let firstPath = [firstPathArray.pop()];
+      let pathsAccessed = {};
+      for (const id in workingArray) pathsAccessed[id] = false;
       let test = findPath(
-        [firstPathArray[i]],
+        [firstPath],
+        pathsAccessed,
         {
-          lat: polylineDistance(
-            currentPos,
-            workingArray[firstPathArray[i]].polyline
-          ).lat,
-          lng: polylineDistance(
-            currentPos,
-            workingArray[firstPathArray[i]].polyline
-          ).lng,
+          lat: polylineDistance(currentPos, workingArray[firstPath].polyline)
+            .lat,
+          lng: polylineDistance(currentPos, workingArray[firstPath].polyline)
+            .lng,
         },
+
         0.1
       );
 
