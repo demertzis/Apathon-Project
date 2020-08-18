@@ -4,10 +4,10 @@ import concaveman from 'concaveman';
 
 export default function concaveCross(polyline1, polyline2, offset) {
   let polygone1 = polygon([
-    concaveman(pathTransform(polyline1, offset), 2, 0.02),
+    concaveman(pathTransform(polyline1, offset), 2, 0.03),
   ]);
   let polygone2 = polygon([
-    concaveman(pathTransform(polyline2, offset), 2, 0.02),
+    concaveman(pathTransform(polyline2, offset), 2, 0.03),
   ]);
   return !booleanDisjoint(polygone1, polygone2);
 }

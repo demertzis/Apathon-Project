@@ -6,6 +6,7 @@ class ChoiceForm extends React.Component {
     this.state = {
       preference: null,
       walkingdistance: 200,
+      pathId: 1,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -49,6 +50,17 @@ class ChoiceForm extends React.Component {
           placeholder="200"
           min="1"
           max="2000"
+          onChange={this.handleChange}
+        />
+        <input type="submit" value="Submit" />
+        <br />
+        <label>Διάλεξε ένα pathId για να εμφανιστεί στο χάρτη</label>
+        <input
+          type="text"
+          name="pathId"
+          placeholder=""
+          min="1"
+          max="228"
           onChange={this.handleChange}
         />
         <input type="submit" value="Submit" />

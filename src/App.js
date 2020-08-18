@@ -31,6 +31,7 @@ class App extends React.Component {
       choice: null,
       walkingDistance: null,
       sampleArr: [],
+      pathId: 1,
     };
     this.setActiveStation = this.setActiveStation.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -66,6 +67,7 @@ class App extends React.Component {
     this.setState({
       choice: e.preference,
       walkingDistance: e.walkingDistance,
+      pathId: e.pathId,
     });
 
     // this.setState({
@@ -124,6 +126,18 @@ class App extends React.Component {
               icon={busIcon}
             />
           ))}
+
+          {paths.features[this.state.pathId - 1].polyline
+            .split(' ')
+            .map((station) => (
+              <Marker
+                position={[
+                  Number(station.split(',')[1]),
+                  Number(station.split(',')[0]),
+                ]}
+              />
+            ))}
+
           {/*{paths.features[41].polyline.split(' ').map(station => (      */}
           {this.state.sampleArr.map((path) =>
             path.polyline
