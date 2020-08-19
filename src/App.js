@@ -9,9 +9,6 @@ import pathsArray from './pathsArray';
 import requests from './requests';
 import computeCrossArray from './computeCrossArray';
 
-paths.features[227].polyline += ',40.63076';
-// var sampleArr = [paths.features[60]];
-
 export const busIcon = new Icon({
   iconUrl: '/bus.svg',
   iconSize: [38, 35],
