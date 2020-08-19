@@ -6,6 +6,8 @@ import * as paths from './paths.json';
 import devices from './devices.json';
 import ChoiceForm from './ChoiceForm.js';
 import pathsArray from './pathsArray';
+import requests from './requests';
+import computeCrossArray from './computeCrossArray';
 
 paths.features[227].polyline += ',40.63076';
 // var sampleArr = [paths.features[60]];
@@ -32,10 +34,14 @@ class App extends React.Component {
       walkingDistance: null,
       sampleArr: [],
       pathId: 1,
+      pathsUpdated: null,
+      crossArray: null,
     };
     this.setActiveStation = this.setActiveStation.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleResponse = this.handleResponse.bind(this);
+    this.handleRefreshRequest = this.handleRefreshRequest.bind(this);
   }
 
   setActiveStation(e) {
@@ -63,6 +69,43 @@ class App extends React.Component {
     });
   }
 
+  handleResponse(res) {
+    if (res.status == 200) {
+      let newPaths = res.data;
+      newPaths[newPaths.length - 1].polyline = newPaths[
+        newPaths.length - 1
+      ].polyline.slice(
+        0,
+        newPaths[newPaths.length - 1].polyline.lastIndexOf(' ')
+      );
+      this.setState({
+        pathsUpdated: newPaths,
+      });
+      if (
+        window.confirm(
+          'Paths data have been downloaded succesfully, ' +
+            'press OK to start computing the crossings array. ' +
+            "The process will take a few minutes so you'll have to " +
+            'make sure the browser does not stop ' +
+            '(press wait if yellow bar appears)'
+        )
+      ) {
+        let newCrossArray = computeCrossArray(newPaths);
+        alert('The cross array has been computed succesfully');
+        this.setState({
+          crossArray: newCrossArray,
+        });
+      }
+    } else
+      alert(
+        'there was an error downloading the data from imet, please try again later'
+      );
+  }
+
+  handleRefreshRequest() {
+    requests('paths.json', this.handleResponse);
+  }
+
   handleSubmit(e) {
     this.setState({
       choice: e.preference,
@@ -70,11 +113,18 @@ class App extends React.Component {
       pathId: e.pathId,
     });
 
-    // this.setState({
-    //   sampleArr: [paths.features[117]]
-    // });
     if (this.state.currentPos && this.state.destination) {
-      let pathsList = pathsArray(this.state.currentPos, this.state.destination);
+      let pathsList;
+      if (this.state.pathsUpdated && this.state.crossArray)
+        pathsList = pathsArray(
+          this.state.currentPos,
+          this.state.destination,
+          this.state.pathsUpdated,
+          this.state.crossArray
+        );
+      else
+        pathsList = pathsArray(this.state.currentPos, this.state.destination);
+
       if (Array.isArray(pathsList) && pathsList.length > 0) {
         let markerArray = [];
         for (let i = 0; i < pathsList[0].length; i++)
@@ -106,6 +156,7 @@ class App extends React.Component {
     return (
       <div>
         <Map
+          style={{ flex: 1 }}
           center={[40.640064, 22.94442]}
           zoom={15}
           onClick={this.handleClick}
@@ -202,7 +253,22 @@ class App extends React.Component {
             </Marker>
           )}
         </Map>
-        <ChoiceForm onClick={this.handleSubmit} />
+        <ChoiceForm style={{ flex: 1 }} onClick={this.handleSubmit} />
+
+        <input
+          type="button"
+          value="test-button"
+          onClick={() => {
+            if (
+              window.confirm(
+                'Are you sure you wish to refresh the crossings array? \n' +
+                  'if you do, a GET request will be sent and then the app will freese for approximately 3 minutes while the new array is computed'
+              )
+            )
+              this.handleRefreshRequest();
+            return;
+          }}
+        />
       </div>
     );
   }

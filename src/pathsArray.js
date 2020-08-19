@@ -8,8 +8,13 @@ import TinyQueue from 'tinyqueue';
 export default function pathsArray(
   currentPos = null,
   destination = null,
+  pathsUpdated = null,
+  crossArrayUpdated = null,
   offset = 0.05
 ) {
+  if (pathsUpdated) console.log(pathsUpdated.length);
+  if (crossArrayUpdated) console.log(crossArrayUpdated.length);
+
   if (distance(currentPos, destination) < 0.3)
     return 'You should get there on foot';
 
@@ -18,7 +23,12 @@ export default function pathsArray(
   if (distance(currentPos, destination) > 60.0)
     return "You can't get there using busses";
 
-  paths.features[227].polyline += ',40.63076';
+  paths.features[paths.features.length - 1].polyline = paths.features[
+    paths.features.length - 1
+  ].polyline.slice(
+    0,
+    paths.features[paths.features.length - 1].polyline.lastIndexOf(' ')
+  );
 
   let devicesArray = [];
   for (let i = 0; i < devices.features.length; i++)
@@ -33,8 +43,10 @@ export default function pathsArray(
     acc[entry.device_id] = entry;
     return acc;
   }, {});
+  let pathArr;
+  if (!pathsUpdated) pathArr = paths.features;
+  else pathArr = pathsUpdated;
 
-  let pathArr = paths.features;
   let i = 0;
   let j = 0;
   let l = pathArr.length;
@@ -95,9 +107,12 @@ export default function pathsArray(
         }
     }
   }
+  let crossArray;
+  if (!crossArrayUpdated) crossArray = crossArrayFull.default;
+  else crossArray = crossArrayUpdated;
 
   for (const id in workingDictionary) {
-    workingDictionary[id].crosses = crossArrayFull.default[Number(id) - 1]
+    workingDictionary[id].crosses = crossArray[Number(id) - 1]
       .reduce((acc, entry, i) => {
         if (entry === true) {
           acc.push((i + 1).toString());
@@ -115,7 +130,6 @@ export default function pathsArray(
       );
   }
   const workingArray = workingDictionary;
-  let crossArray = [];
   let firstPathArray = [];
   i = 0;
   for (const id in workingArray) {
@@ -147,7 +161,7 @@ export default function pathsArray(
       let path = currentNode.path;
       let pathsAccessed = currentNode.pathsAccessed;
       let startPos = currentNode.startPos;
-      if (path.length > 4) continue;
+      if (path.length > 7) continue;
       const lastPath = path[path.length - 1];
       let destDevice = {
         lat: Number(
@@ -167,12 +181,6 @@ export default function pathsArray(
         dist2 < 0.3 ||
         (workingArray[lastPath].close_to_finish && dist2 <= dist3)
       ) {
-        console.log(
-          path.map((x) => ({
-            id: workingArray[x].Path_id,
-            origin: workingArray[x].Path_origin_device_id,
-          }))
-        );
         solutions.push(path);
         continue;
       }
