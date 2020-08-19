@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default function requests(type, responseFunction) {
+export default async function requests(type, responseFunction = null) {
   let arr = [];
   const baseUrl = 'http://feed.opendata.imet.gr:23577/itravel/';
 
@@ -15,11 +15,13 @@ export default function requests(type, responseFunction) {
     .then(
       (response) => {
         console.log(response);
+        if (responseFunction == null) return response;
         responseFunction(response);
         return;
       },
       (error) => {
         console.log(error);
+        if (responseFunction == null) return error;
         responseFunction(error);
         return;
       }
