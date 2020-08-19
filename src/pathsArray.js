@@ -18,7 +18,8 @@ export default function pathsArray(
   if (distance(currentPos, destination) < 0.3)
     return 'You should get there on foot';
 
-  if (currentPos == null || destination == null) return null;
+  if (currentPos == null || destination == null)
+    return 'Some of the parameters are missing';
 
   if (distance(currentPos, destination) > 60.0)
     return "You can't get there using busses";
@@ -145,9 +146,6 @@ export default function pathsArray(
     startPos1 = null,
     offset = 0.05
   ) {
-    if (!path1) return null;
-    // console.log(JSON.stringify(path1));
-
     let queue = new TinyQueue();
     let solutions = [];
     queue.push({
@@ -201,7 +199,6 @@ export default function pathsArray(
 
       let i = 0;
       l = crossList.length;
-
       for (i in crossList) {
         let pathPoints = workingArray[lastPath].polyline.split(' ');
         let newStartPos = polylineDistance(
@@ -250,7 +247,6 @@ export default function pathsArray(
     return solutions;
   }
 
-  let finalAnswer = [];
   if (firstPathArray.length > 0) {
     let i = 0;
     let l = firstPathArray.length;
@@ -258,7 +254,7 @@ export default function pathsArray(
       let firstPath = [firstPathArray.pop()];
       let pathsAccessed = {};
       for (const id in workingArray) pathsAccessed[id] = false;
-      let test = findPath(
+      let finalAnswer = findPath(
         firstPath,
         pathsAccessed,
         {
@@ -270,13 +266,11 @@ export default function pathsArray(
 
         0.1
       );
-
-      if (Array.isArray(test) && test.length > 0)
-        finalAnswer = finalAnswer.concat(test);
+      if (Array.isArray(finalAnswer) && finalAnswer.length > 0)
+        return finalAnswer;
     }
-    if (Array.isArray(finalAnswer) && finalAnswer.length > 0)
-      return finalAnswer;
-  }
 
+    return "You can't get there using busses";
+  }
   return "You can't get there using busses";
 }

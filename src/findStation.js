@@ -15,8 +15,10 @@ export default async function findStation(
   if (!currentPos || !destination || !choice)
     return 'error: Some of the parameters are missing';
   let viablePaths = pathsArray(currentPos, destination, pathsArr, crossArray);
-  console.log(viablePaths.length);
-  if (viablePaths.length == 0) return "Sorry you can't get there using busses";
+  if (!Array.isArray(viablePaths));
+  {
+    throw viablePaths;
+  }
 
   function findMinLength() {
     let minLength = viablePaths[0].length;

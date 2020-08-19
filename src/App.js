@@ -175,12 +175,17 @@ class App extends React.Component {
         this.state.pathsUpdated,
         this.state.crossArray,
         e.preference
-      ).then((resp) => {
-        this.setState({
-          lastAnswer: resp,
+      )
+        .then((resp) => {
+          this.setState({
+            lastAnswer: resp,
+          });
+          alert(resp);
+        })
+        .catch((error) => {
+          console.log(error);
+          alert('An error occured: ' + error + '. Pls try again.');
         });
-        alert(resp);
-      });
     } else alert('some of the parameters are missing');
     // if (this.state.currentPos && this.state.destination) {
     //   let pathsList = pathsArray(
