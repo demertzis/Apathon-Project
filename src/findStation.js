@@ -1,7 +1,5 @@
-import * as devices from './devices.json';
 import * as paths from './paths.json';
 import polylineDistance from './polylineDistance.js';
-import requests from './requests.js';
 import pathsArray from './pathsArray';
 import axios from 'axios';
 
@@ -10,11 +8,23 @@ export default async function findStation(
   destination = null,
   pathsArr = null,
   crossArray = null,
+  devices = null,
   choice = null
 ) {
   if (!currentPos || !destination || !choice)
     return 'error: Some of the parameters are missing';
-  let viablePaths = pathsArray(currentPos, destination, pathsArr, crossArray);
+  if (!devices)
+    return (
+      'error: The device data is corrupted or missing please ' +
+      ' refresh and try again'
+    );
+  let viablePaths = pathsArray(
+    currentPos,
+    destination,
+    pathsArr,
+    crossArray,
+    devices
+  );
   if (!Array.isArray(viablePaths)) throw viablePaths;
 
   function findMinLength() {

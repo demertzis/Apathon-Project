@@ -1,6 +1,6 @@
 import * as paths from './paths.json';
 import polylineDistance from './polylineDistance';
-import * as devices from './devices.json';
+// import * as devices from './devices.json';
 import * as crossArrayFull from './crossArray.json';
 import distance from './distance.js';
 import TinyQueue from 'tinyqueue';
@@ -10,6 +10,7 @@ export default function pathsArray(
   destination = null,
   pathsUpdated = null,
   crossArrayUpdated = null,
+  devices = null,
   offset = 0.05
 ) {
   if (pathsUpdated) console.log(pathsUpdated.length);
@@ -32,12 +33,12 @@ export default function pathsArray(
   );
 
   let devicesArray = [];
-  for (let i = 0; i < devices.features.length; i++)
-    devicesArray[devices.features[i].device_id] = {
-      device_id: devices.features[i].device_id,
-      device_Name: devices.features[i].device_Name,
-      lat: Number(devices.features[i].lat),
-      lng: Number(devices.features[i].lon),
+  for (let i = 0; i < devices.length; i++)
+    devicesArray[devices[i].device_id] = {
+      device_id: devices[i].device_id,
+      device_Name: devices[i].device_Name,
+      lat: Number(devices[i].lat),
+      lng: Number(devices[i].lon),
     };
 
   devicesArray.reduce((acc, entry, i) => {

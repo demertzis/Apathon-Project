@@ -3,11 +3,8 @@ import { Map, Marker, Popup, TileLayer, Polyline } from 'react-leaflet';
 import { Icon } from 'leaflet';
 import './App.css';
 import * as paths from './paths.json';
-import devices from './devices.json';
 import ChoiceForm from './ChoiceForm.js';
 import PathIdForm from './PathIdForm.js';
-// import pathsArray from './pathsArray';
-// import requests from './requests';
 import computeCrossArray from './computeCrossArray';
 import findStation from './findStation.js';
 import axios from 'axios';
@@ -31,18 +28,17 @@ class App extends React.Component {
       destination: null,
       flag: true,
       choice: null,
-      // walkingDistance: null,
       sampleArr: [],
       pathId: null,
       pathsUpdated: null,
       crossArray: null,
+      devices: [],
       lastAnswer: [],
     };
     this.setActiveStation = this.setActiveStation.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handlePathSubmit = this.handlePathSubmit.bind(this);
-    // this.handleResponse = this.handleResponse.bind(this);
     this.handleRefreshRequest = this.handleRefreshRequest.bind(this);
   }
 
@@ -71,41 +67,7 @@ class App extends React.Component {
     });
   }
 
-  // handleResponse(res) {
-  //   if (res.status == 200) {
-  //     let newPaths = res.data;
-  //     newPaths[newPaths.length - 1].polyline = newPaths[
-  //       newPaths.length - 1
-  //     ].polyline.slice(
-  //       0,
-  //       newPaths[newPaths.length - 1].polyline.lastIndexOf(' ')
-  //     );
-  //     this.setState({
-  //       pathsUpdated: newPaths,
-  //     });
-  //     if (
-  //       window.confirm(
-  //         'Paths data have been downloaded succesfully, ' +
-  //           'press OK to start computing the crossings array. ' +
-  //           "The process will take a few minutes so you'll have to " +
-  //           'make sure the browser does not stop ' +
-  //           '(press wait if yellow bar appears)'
-  //       )
-  //     ) {
-  //       let newCrossArray = computeCrossArray(newPaths);
-  //       alert('The cross array has been computed succesfully');
-  //       this.setState({
-  //         crossArray: newCrossArray,
-  //       });
-  //     }
-  //   } else
-  //     alert(
-  //       'there was an error downloading the data from imet, please try again later'
-  //     );
-  // }
-
   async handleRefreshRequest() {
-    // requests('paths.json', this.handleResponse);
     let temp;
     await axios
       .get(
@@ -174,6 +136,7 @@ class App extends React.Component {
         this.state.destination,
         this.state.pathsUpdated,
         this.state.crossArray,
+        this.state.devices,
         e.preference
       )
         .then((resp) => {
@@ -188,25 +151,41 @@ class App extends React.Component {
           else alert('An error occured: ' + error + '. Pls try again.');
         });
     } else alert('some of the parameters are missing');
-    // if (this.state.currentPos && this.state.destination) {
-    //   let pathsList = pathsArray(
-    //     this.state.currentPos,
-    //     this.state.destination,
-    //     this.state.pathsUpdated,
-    //     this.state.crossArray
-    //   );
+  }
 
-    //   if (Array.isArray(pathsList) && pathsList.length > 0) {
-    //     let markerArray = [];
-    //     for (let i = 0; i < pathsList[0].length; i++)
-    //       markerArray.push(paths.features[pathsList[0][i] - 1]);
-
-    //     this.setState({
-    //       sampleArr: markerArray,
-    //     });
-    //   }
-    //   alert(JSON.stringify(pathsList));
-    // }
+  componentDidMount() {
+    console.log(
+      'The application should be up and running. If you want to refresh the' +
+        ' paths data and consequently the path intersections tap the button ' +
+        'on the bottom left. Be advised though, this process will freeze the ' +
+        'applicaton for a few minutes'
+    );
+    let errorMessage =
+      'There was an error downloading devices data. ' +
+      'You can only show paths with the second option, if you want to ' +
+      'use the main function of the app pls refresh';
+    axios
+      .get(
+        'http://feed.opendata.imet.gr:23577/itravel/' +
+          'devices.json' +
+          '?offset=0&limit=500',
+        {
+          timeout: 10000,
+        }
+      )
+      .then(
+        (resp) => {
+          if (resp.status == 200) {
+            this.setState({
+              devices: resp.data,
+            });
+            alert(' Devices data have been downloaded succesfully');
+          } else alert(errorMessage);
+        },
+        (error) => {
+          alert(errorMessage);
+        }
+      );
   }
 
   render() {
@@ -224,16 +203,17 @@ class App extends React.Component {
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           />
 
-          {devices.features.map((station) => (
-            <Marker
-              key={station.device_id}
-              position={[station.lat, station.lon]}
-              onClick={() => {
-                this.setActiveStation(station);
-              }}
-              icon={busIcon}
-            />
-          ))}
+          {this.state.devices &&
+            this.state.devices.map((station) => (
+              <Marker
+                key={station.device_id}
+                position={[station.lat, station.lon]}
+                onClick={() => {
+                  this.setActiveStation(station);
+                }}
+                icon={busIcon}
+              />
+            ))}
 
           {this.state.pathId &&
             paths.features[this.state.pathId - 1].polyline
@@ -291,17 +271,6 @@ class App extends React.Component {
                 />
               );
             })}
-          {/* 
-        {sampleArr.map(path => pathTransform(path.polyline, 0.1).split(' ').map(station => (
-          <Marker
-            position={[
-              Number(station.split(',')[1]),
-              Number(station.split(',')[0])
-            ]
-            }
-          />
-        )))
-        } */}
 
           {this.state.activeStation && (
             <Popup
