@@ -184,7 +184,8 @@ class App extends React.Component {
         })
         .catch((error) => {
           console.log(error);
-          alert('An error occured: ' + error + '. Pls try again.');
+          if (typeof error === 'string') alert(error);
+          else alert('An error occured: ' + error + '. Pls try again.');
         });
     } else alert('some of the parameters are missing');
     // if (this.state.currentPos && this.state.destination) {

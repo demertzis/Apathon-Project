@@ -95,7 +95,7 @@ export default async function findStation(
       });
       return answer;
     } else
-      return (
+      throw (
         'there has been a problem with the retrieval of trajectory' +
         ' data from imet, please try again later'
       );
