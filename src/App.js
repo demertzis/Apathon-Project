@@ -163,7 +163,7 @@ class App extends React.Component {
     let errorMessage =
       'There was an error downloading devices data. ' +
       'You can only show paths with the second option, if you want to ' +
-      'use the main function of the app pls refresh';
+      'use the main function of the app please refresh';
     axios
       .get(
         'http://feed.opendata.imet.gr:23577/itravel/' +
@@ -316,7 +316,7 @@ class App extends React.Component {
 
         <input
           type="button"
-          value="test-button"
+          value="Paths Refresh"
           onClick={() => {
             if (
               window.confirm(
@@ -327,6 +327,7 @@ class App extends React.Component {
               this.handleRefreshRequest();
             return;
           }}
+          style={{ position: 'absolute', right: 10, bottom: 20 }}
         />
       </div>
     );

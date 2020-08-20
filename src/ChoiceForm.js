@@ -5,8 +5,6 @@ class ChoiceForm extends React.Component {
     super(props);
     this.state = {
       preference: null,
-      // walkingdistance: 200,
-      // pathId: 1,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -32,6 +30,7 @@ class ChoiceForm extends React.Component {
           value={this.state.preference}
           name="preference"
           onChange={this.handleChange}
+          clss={'field-select'}
         >
           <option selected value={null}>
             {null}
@@ -39,18 +38,6 @@ class ChoiceForm extends React.Component {
           <option value="proximity">Εγκύτητα στη τωρινή τοποθεσία μου</option>
           <option value="covid">Εκτιμώμενη ασφάλεια στον κορονοιό</option>
         </select>
-        {/* <label>
-          Επέλεξε τη μέγιστη απόσταση που προτίθεσαι να περπατήσεις (default:
-          200m)
-        </label>
-        <input
-          type="text"
-          name="walkingdistance"
-          placeholder="200"
-          min="1"
-          max="2000"
-          onChange={this.handleChange}
-        /> */}
         <input type="submit" value="Submit" />
         <br />
       </form>

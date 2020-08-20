@@ -10,8 +10,7 @@ export default function pathsArray(
   destination = null,
   pathsUpdated = null,
   crossArrayUpdated = null,
-  devices = null,
-  offset = 0.05
+  devices = null
 ) {
   if (pathsUpdated) console.log(pathsUpdated.length);
   if (crossArrayUpdated) console.log(crossArrayUpdated.length);
@@ -32,16 +31,16 @@ export default function pathsArray(
     paths.features[paths.features.length - 1].polyline.lastIndexOf(' ')
   );
 
-  let devicesArray = [];
+  let devicesList = [];
   for (let i = 0; i < devices.length; i++)
-    devicesArray[devices[i].device_id] = {
+    devicesList[devices[i].device_id] = {
       device_id: devices[i].device_id,
       device_Name: devices[i].device_Name,
       lat: Number(devices[i].lat),
       lng: Number(devices[i].lon),
     };
 
-  devicesArray.reduce((acc, entry, i) => {
+  const devicesArray = devicesList.reduce((acc, entry, i) => {
     acc[entry.device_id] = entry;
     return acc;
   }, {});
@@ -141,12 +140,7 @@ export default function pathsArray(
   }
   const length = i;
 
-  function findPath(
-    path1 = null,
-    pathsAccessed1 = null,
-    startPos1 = null,
-    offset = 0.05
-  ) {
+  function findPath(path1 = null, pathsAccessed1 = null, startPos1 = null) {
     let queue = new TinyQueue();
     let solutions = [];
     queue.push({
@@ -174,7 +168,6 @@ export default function pathsArray(
       let dist1 = distance(startPos, destination);
       let dist2 = distance(destDevice, destination);
       let dist3 = distance(destDevice, startPos);
-
       if (
         dist1 < 0.3 ||
         dist2 < 0.3 ||
@@ -251,11 +244,12 @@ export default function pathsArray(
   if (firstPathArray.length > 0) {
     let i = 0;
     let l = firstPathArray.length;
+    let finalAnswer = [];
     for (; i < l; i++) {
       let firstPath = [firstPathArray.pop()];
       let pathsAccessed = {};
       for (const id in workingArray) pathsAccessed[id] = false;
-      let finalAnswer = findPath(
+      let answer = findPath(
         firstPath,
         pathsAccessed,
         {
@@ -267,11 +261,12 @@ export default function pathsArray(
 
         0.1
       );
-      if (Array.isArray(finalAnswer) && finalAnswer.length > 0)
-        return finalAnswer;
+      if (Array.isArray(answer) && answer.length > 0)
+        finalAnswer = finalAnswer.concat(answer);
     }
-
-    return "You can't get there using busses";
+    if (Array.isArray(finalAnswer) && finalAnswer.length > 0)
+      return finalAnswer;
+    else return "You can't get there using busses";
   }
   return "You can't get there using busses";
 }

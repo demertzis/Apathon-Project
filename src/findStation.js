@@ -26,7 +26,7 @@ export default async function findStation(
     devices
   );
   if (!Array.isArray(viablePaths)) throw viablePaths;
-
+  console.log(viablePaths);
   function findMinLength() {
     let minLength = viablePaths[0].length;
     viablePaths.forEach((element) => {
@@ -35,17 +35,18 @@ export default async function findStation(
     return minLength;
   }
 
-  let pathsDictionary;
-  if (!pathsArr) pathsDictionary = paths.features;
-  else pathsDictionary = pathsArr;
-  pathsDictionary.reduce((acc, entry, i) => {
+  let length = findMinLength();
+
+  let pathsList;
+  if (!pathsArr) pathsList = paths.features;
+  else pathsList = pathsArr;
+  const pathsDictionary = pathsList.reduce((acc, entry, i) => {
     acc[entry.Path_id] = entry;
     return acc;
   }, {});
 
   if (choice === 'proximity') {
-    let length = findMinLength();
-    let candidatePaths = viablePaths.filter((e) => e.length == length);
+    let candidatePaths = viablePaths.filter((e) => e.length <= length + 1);
     let closestPath = polylineDistance(
       currentPos,
       pathsDictionary[candidatePaths[0][0]].polyline
@@ -56,13 +57,15 @@ export default async function findStation(
         currentPos,
         pathsDictionary[e[0]].polyline
       );
-      if (candidate.dist < closestPath.dist) answer = e;
+      if (
+        candidate.dist + 0.1 < closestPath.dist ||
+        (candidate.dist < closestPath.dist + 0.1 && e.length < answer.length)
+      )
+        answer = e;
     });
     return answer;
   } else if (choice === 'covid') {
     let temp;
-    let trajectories = [];
-    let offset = 0;
     await axios
       .get(
         'http://feed.opendata.imet.gr:23577/itravel/' +
@@ -88,19 +91,24 @@ export default async function findStation(
         if (!devices[entry.itravel_id]) devices[entry.itravel_id] = 1;
         else devices[entry.itravel_id]++;
       });
-      let answer = viablePaths[0];
+      let count = 0;
+      for (const id in devices) count++;
+      let candidatePaths = viablePaths.filter((e) => e.length <= length + 2);
+      let answer = candidatePaths[0];
 
       function computeTotalTrajectories(pathList = []) {
         let sum = 0;
         pathList.forEach((entry) => {
           let temp = devices[pathsDictionary[entry].Path_origin_device_id];
-          if (temp) sum += temp;
-          return sum;
+          if (temp) sum += temp / (10000 / count);
         });
+        debugger;
+        return sum;
       }
 
-      viablePaths.forEach((entry) => {
-        if (computeTotalTrajectories(answer) < computeTotalTrajectories[entry])
+      candidatePaths.forEach((entry) => {
+        debugger;
+        if (computeTotalTrajectories(answer) > computeTotalTrajectories(entry))
           answer = entry;
       });
       return answer;
