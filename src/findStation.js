@@ -26,6 +26,7 @@ export default async function findStation(
     devices
   );
   if (!Array.isArray(viablePaths)) throw viablePaths;
+  console.log('The viable paths are: ');
   console.log(viablePaths);
   function findMinLength() {
     let minLength = viablePaths[0].length;
@@ -82,7 +83,11 @@ export default async function findStation(
         (error) => {
           temp = error;
         }
-      );
+      )
+      .catch((error) => {
+        console.log(error);
+        throw error;
+      });
     console.log(temp);
     if (temp.status == 200) {
       let trajectories = temp.data;

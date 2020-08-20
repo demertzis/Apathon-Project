@@ -12,11 +12,10 @@ export default function pathsArray(
   crossArrayUpdated = null,
   devices = null
 ) {
-  if (pathsUpdated) console.log(pathsUpdated.length);
-  if (crossArrayUpdated) console.log(crossArrayUpdated.length);
-
-  if (distance(currentPos, destination) < 0.3)
-    return 'You should get there on foot';
+  if (pathsUpdated)
+    if (crossArrayUpdated)
+      if (distance(currentPos, destination) < 0.3)
+        return 'You should get there on foot';
 
   if (currentPos == null || destination == null)
     return 'Some of the parameters are missing';

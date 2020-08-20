@@ -81,11 +81,18 @@ class App extends React.Component {
       .then(
         (resp) => {
           temp = resp;
+          console.log(resp);
         },
         (error) => {
           temp = error;
         }
-      );
+      )
+      .catch((error) => {
+        alert(
+          'there was an error downloading the data from imet, please try again later'
+        );
+        console.log(error);
+      });
     if (temp.status == 200) {
       let newPaths = temp.data;
       newPaths[newPaths.length - 1].polyline = newPaths[
@@ -179,13 +186,19 @@ class App extends React.Component {
             this.setState({
               devices: resp.data,
             });
+            console.log(resp);
             alert(' Devices data have been downloaded succesfully');
           } else alert(errorMessage);
         },
         (error) => {
           alert(errorMessage);
+          console.log(error);
         }
-      );
+      )
+      .catch((error) => {
+        alert(errorMessage);
+        console.log(error);
+      });
   }
 
   render() {
