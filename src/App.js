@@ -10,7 +10,7 @@ import findStation from './findStation.js';
 import axios from 'axios';
 
 export const busIcon = new Icon({
-  iconUrl: '/bus.svg',
+  iconUrl: '/bus-stop-pointer.svg',
   iconSize: [38, 35],
 });
 
