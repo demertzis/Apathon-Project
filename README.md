@@ -28,7 +28,7 @@
 
 - Η βιβλιοθήκη turf js καθώς και η συνάρτηση concaveman για τις απαιτούμενες γεω-
   μετρικές διεργασίες
-
+πληκτρολογούμε τις ακόλουθες εντολές: npm install npm run build serve build
 - Η βιβλιοθήκη react-leaflet (που έχει τη leaflet σαν βασικό dependency) για την α-
   πεικόνιση του διαδραστικού χάρτη καθώς και το layer από το openstreetmaps
   (το link που αναγράφεται πάνω πάνω στην εφαρμογή μπήκε κατ'απαίτηση του δημιου-
@@ -82,9 +82,9 @@ https://tecadmin.net/install-nodejs-with-nvm/
 πλοηγούμαστε με το terminal στο φάκελο που έγινε το clone
 
 πληκτρολογούμε τις ακόλουθες εντολές:
-npm install
-npm run build
-serve build
+* npm install
+* npm run build
+* serve build
 
 Στη συνέχεια ανοίγουμε έναν browser (το δοκίμασα και τρέχει σε chrome και firefox
 τελευταίες εκδόσεις) στη διεύθυνση που αναγράφεται στο terminal (by default localhost:5000)
