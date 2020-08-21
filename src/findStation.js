@@ -23,7 +23,8 @@ export default async function findStation(
     destination,
     pathsArr,
     crossArray,
-    devices
+    devices,
+    choice
   );
   if (!Array.isArray(viablePaths)) throw viablePaths;
   console.log('The viable paths are: ');

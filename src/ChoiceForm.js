@@ -25,7 +25,7 @@ class ChoiceForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label>Διαλέξτε το κριτήριο επιλογής στάσης λεωφορείου</label>
+        <label>Διάλεξε το κριτήριο επιλογής στάσης λεωφορείου</label>
         <select
           value={this.state.preference}
           name="preference"

@@ -1,16 +1,16 @@
 import * as paths from './paths.json';
 import polylineDistance from './polylineDistance';
-// import * as devices from './devices.json';
 import * as crossArrayFull from './crossArray.json';
 import distance from './distance.js';
-import TinyQueue from 'tinyqueue';
+import Queue from 'tiny-queue';
 
 export default function pathsArray(
   currentPos = null,
   destination = null,
   pathsUpdated = null,
   crossArrayUpdated = null,
-  devices = null
+  devices = null,
+  choice = null
 ) {
   if (pathsUpdated)
     if (crossArrayUpdated)
@@ -139,21 +139,30 @@ export default function pathsArray(
   }
   const length = i;
 
-  function findPath(path1 = null, pathsAccessed1 = null, startPos1 = null) {
-    let queue = new TinyQueue();
+  function findPath(path1 = null) {
+    let queue = new Queue();
     let solutions = [];
-    queue.push({
-      path: path1,
-      pathsAccessed: pathsAccessed1,
-      startPos: startPos1,
+    let coefficient = choice == 'proximity' ? 1 : 2;
+    let maxLength = 7;
+    let pathsAccessed1 = {};
+    for (const id in workingArray) pathsAccessed1[id] = false;
+    path1.forEach((e) => {
+      queue.push({
+        path: [e],
+        pathsAccessed: pathsAccessed1,
+        startPos: {
+          lat: polylineDistance(currentPos, workingArray[e].polyline).lat,
+          lng: polylineDistance(currentPos, workingArray[e].polyline).lng,
+        },
+      });
     });
 
     while (queue.length > 0) {
-      let currentNode = queue.pop();
+      let currentNode = queue.shift();
       let path = currentNode.path;
       let pathsAccessed = currentNode.pathsAccessed;
       let startPos = currentNode.startPos;
-      if (path.length > 7) continue;
+      if (path.length > maxLength + coefficient || path.length > 7) continue;
       const lastPath = path[path.length - 1];
       let destDevice = {
         lat: Number(
@@ -172,6 +181,7 @@ export default function pathsArray(
         dist2 < 0.3 ||
         (workingArray[lastPath].close_to_finish && dist2 <= dist3)
       ) {
+        maxLength = path.length < maxLength ? path.length : maxLength;
         solutions.push(path);
         continue;
       }
@@ -241,28 +251,7 @@ export default function pathsArray(
   }
 
   if (firstPathArray.length > 0) {
-    let i = 0;
-    let l = firstPathArray.length;
-    let finalAnswer = [];
-    for (; i < l; i++) {
-      let firstPath = [firstPathArray.pop()];
-      let pathsAccessed = {};
-      for (const id in workingArray) pathsAccessed[id] = false;
-      let answer = findPath(
-        firstPath,
-        pathsAccessed,
-        {
-          lat: polylineDistance(currentPos, workingArray[firstPath].polyline)
-            .lat,
-          lng: polylineDistance(currentPos, workingArray[firstPath].polyline)
-            .lng,
-        },
-
-        0.1
-      );
-      if (Array.isArray(answer) && answer.length > 0)
-        finalAnswer = finalAnswer.concat(answer);
-    }
+    let finalAnswer = findPath(firstPathArray);
     if (Array.isArray(finalAnswer) && finalAnswer.length > 0)
       return finalAnswer;
     else return "You can't get there using busses";

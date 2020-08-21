@@ -16,6 +16,7 @@
     "react-dom": "^16.13.1",
     "react-leaflet": "^2.7.0",
     "react-scripts": "3.4.1",
+    "tiny-queue": "^0.2.1",
     "turf-linestring": "^1.0.2"
   },
   "scripts": {
