@@ -165,7 +165,7 @@ class App extends React.Component {
       'The application should be up and running. If you want to refresh the' +
         ' paths data and consequently the path intersections tap the button ' +
         'on the bottom left. Be advised though, this process will freeze the ' +
-        'applicaton for a few minutes'
+        'applicaton for approximately a minute'
     );
     let errorMessage =
       'There was an error downloading devices data. ' +
@@ -334,7 +334,7 @@ class App extends React.Component {
             if (
               window.confirm(
                 'Are you sure you wish to refresh the crossings array? \n' +
-                  'if you do, a GET request will be sent and then the app will freese for approximately 3 minutes while the new array is computed'
+                  'if you do, a GET request will be sent and then the app will freese for approximately a minute while the new array is computed'
               )
             )
               this.handleRefreshRequest();
