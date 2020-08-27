@@ -10,6 +10,7 @@
     "@turf/turf": "^5.1.6",
     "axios": "^0.19.2",
     "concaveman": "^1.2.0",
+    "leaflet": "^1.6.0",
     "patch-package": "^6.2.2",
     "prettier": "^2.0.5",
     "react": "^16.13.1",
