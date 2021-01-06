@@ -8,7 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "@turf/boolean-crosses": "^6.0.1",
     "@turf/turf": "^5.1.6",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "concaveman": "^1.2.0",
     "leaflet": "^1.6.0",
     "patch-package": "^6.2.2",
